@@ -3,6 +3,7 @@ import { createClient } from 'contentful';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import { LoadingBlog } from '../../components/LoadingBlog';
 import styles from '../../styles/Home.module.scss';
 
 const client = createClient({
@@ -19,7 +20,7 @@ export const getStaticPaths = async () => {
     };
   });
 
-  return { paths, fallback: false };
+  return { paths, fallback: true };
 };
 
 export const getStaticProps = async ({ params }) => {
@@ -31,16 +32,19 @@ export const getStaticProps = async ({ params }) => {
   return {
     props: {
       blogData: items[0],
+      revalidate: 10,
     },
   };
 };
 
 const BlogDetails = ({ blogData }) => {
+  if (!blogData) return <LoadingBlog />;
+
   const { title, slug, thumbnail, content } = blogData.fields;
   const { file } = blogData.fields.thumbnail.fields;
   const imgSrc = file.url;
-  const imgWidth = file.details.image.width;
-  const imgHeight = file.details.image.height;
+  // const imgWidth = file.details.image.width;
+  // const imgHeight = file.details.image.height;
   return (
     <>
       <Head>
