@@ -6,8 +6,8 @@ import Link from 'next/link';
 import styles from '../../styles/Home.module.scss';
 
 const client = createClient({
-  space: process.env.NEXT_APP_SPACE,
-  accessToken: process.env.NEXT_APP_ACCESS_TOKEN,
+  space: process.env.CONTENTFUL_APP_SPACE,
+  accessToken: process.env.CONTENTFUL_APP_ACCESS_TOKEN,
 });
 
 export const getStaticPaths = async () => {

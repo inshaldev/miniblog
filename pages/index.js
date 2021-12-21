@@ -5,8 +5,8 @@ import Blogs from '../components/Blogs';
 
 export const getStaticProps = async () => {
   const client = createClient({
-    space: process.env.NEXT_APP_SPACE,
-    accessToken: process.env.NEXT_APP_ACCESS_TOKEN,
+    space: process.env.CONTENTFUL_APP_SPACE,
+    accessToken: process.env.CONTENTFUL_APP_ACCESS_TOKEN,
   });
 
   const res = await client.getEntries({ content_type: 'blog' });
